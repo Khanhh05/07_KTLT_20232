@@ -1,0 +1,10 @@
+string mshh; // ma so hang hoa
+string name; // ten san pham
+string material; // phan loai huu co hay vo co
+string origin; // xuat xu
+double cost; // gia thanh
+string nsx, hsd; // ngay san xuat va han su dung
+int quantity; // so luong hang nhap, xuat
+string time; // thoi gian
+string place; // dia diem giao hang den
+string nx; // nhap hoac xuat
