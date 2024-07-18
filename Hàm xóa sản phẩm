@@ -1,0 +1,21 @@
+void xoaSanPham(Product p[], int &count) {
+    string mshh;
+    cout << "Nhap ma so hang hoa can xoa: "; cin >> mshh;
+    int index = -1;
+    for (int i = 0; i < count; i++) {
+        if (p[i].getMshh() == mshh) {
+            index = i;
+            break;
+        }
+    }
+    if (index == -1) {
+        cout << "Khong tim thay hang hoa can xoa!\n";
+        return;
+    }
+
+    for (int i = index; i < count - 1; i++) {
+        p[i] = p[i + 1];
+    }
+    count--;
+    cout << "Da xoa hang hoa co ma so " << mshh << "!\n";
+}
