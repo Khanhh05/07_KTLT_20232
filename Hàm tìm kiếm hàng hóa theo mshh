@@ -1,0 +1,14 @@
+void tkms(Product p[], int N) {
+    string mshh;
+    cout << "Nhap ma so hang hoa can tim: "; cin >> mshh;
+    bool found = false;
+    for (int i = 0; i < N; i++) {
+        if (p[i].getMshh() == mshh) {
+            p[i].in();
+            found = true; // da tim thay
+            break;
+        }
+    }
+    if (!found)
+        cout << "Khong tim thay hang hoa can tim!\n";
+}
