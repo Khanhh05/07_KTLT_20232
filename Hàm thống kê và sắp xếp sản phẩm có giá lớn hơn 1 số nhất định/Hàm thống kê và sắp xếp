@@ -1,0 +1,20 @@
+void thongKeVaSapXep(Product p[], int N) {
+    double giaCanTim;
+    printf("Nhap gia can tim: ");
+    scanf("%lf", &giaCanTim);
+
+    int count = 0;
+    for (int i = 0; i < N; ++i) {
+        if (p[i].cost > giaCanTim) {
+            if (count == 0) {
+                printf("Danh sach cac san pham co gia lon hon %.2f:\n", giaCanTim);
+            }
+            in(&p[i]);
+            count++;
+        }
+    }
+
+    sapXepGiaGiamDan(p, N);
+    printf("Danh sach hang hoa sau khi sap xep theo gia giam dan:\n");
+    inds(p, N);
+}
