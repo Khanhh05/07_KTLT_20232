@@ -1,0 +1,13 @@
+void nhap() { // ham nhap thong tin hang hoa
+        cout << "Nhap trang thai hang hoa(nhap/xuat): "; cin >> nx;
+        cout << "Nhap ma so hang hoa: "; cin >> mshh;
+        cout << "Nhap ten san pham: "; cin.ignore(); getline(cin, name);
+        cout << "Phan loai san pham(huu co/vo co): "; getline(cin, material);
+        cout << "Nguon goc san pham: "; getline(cin, origin);
+        cout << "Gia thanh: "; cin >> cost;
+        cout << "NSX: "; cin.ignore(); getline(cin, nsx);
+        cout << "HSD: "; getline(cin, hsd);
+        cout << "Nhap so luong san pham trong kho: "; cin >> quantity;
+        cout << "Nhap thoi gian: "; cin.ignore(); getline(cin, time);
+        cout << "Nhap dia diem: "; getline(cin, place);
+    }
