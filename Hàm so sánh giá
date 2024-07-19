@@ -1,3 +1,2 @@
-// ham so sanh de sap xep theo gia giam dan
 bool sosanhGia(const Product& a, const Product& b) {
     return a.getCost() > b.getCost();
