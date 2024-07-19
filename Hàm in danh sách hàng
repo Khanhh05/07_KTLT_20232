@@ -1,0 +1,20 @@
+static void inds(Product p[], int N) { // in danh sach hang hoa
+        cout << "Thong tin hang hoa: \n";
+        for (int i = 0; i < N; i++) {
+            p[i].in();
+        }
+    }
+
+    double getCost() const {
+        return cost;
+    }
+
+    string getMshh() const {
+        return mshh;
+    }
+    string getNx() const{
+	    return nx;
+	}
+    // Friend function to access private members
+    friend void tkms(Product p[], int N);
+};
