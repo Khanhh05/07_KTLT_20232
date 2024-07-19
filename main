@@ -12,12 +12,11 @@ int main() {
         cout << "             |      4. Sap xep hang hoa theo gia giam dan                     |\n";
         cout << "             |      5. Thong ke va sap xep san pham co gia lon hon mot so     |\n";
        	cout << "             |      6. Tim hiem hang hoa theo trang thai(nhap/xuat)           |\n";
-		cout << "             |      7. Xoa thong tin hang hoa                                 |\n";
-		cout << "             |      8. Thoat                                                  |\n";
+	cout << "             |      7. Xoa thong tin hang hoa                                 |\n";
+	cout << "             |      8. Thoat                                                  |\n";
         cout << "             |      Lua chon cua ban:                                         |\n";
         cout << "             ------------------------------------------------------------------\n";
-		cin >> choice;
-
+	cin >> choice;
         switch (choice) {
         case 1:
              if (count >= N) {
