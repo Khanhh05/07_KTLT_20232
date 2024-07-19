@@ -1,0 +1,17 @@
+void suaSanPham(Product p[], int N) {
+    string mshh;
+    cout << "Nhap ma so hang hoa can sua: "; cin >> mshh;
+    bool found = false;
+    for (int i = 0; i < N; ++i) {
+        if (p[i].getMshh() == mshh) {
+            found = true;
+            cout << "Nhap thong tin moi cho san pham:\n";
+            p[i].nhap();
+            cout << "San pham da duoc sua thanh cong!\n";
+            break;
+        }
+    }
+    if (!found) {
+        cout << "Khong tim thay san pham co ma so " << mshh << "!\n";
+    }
+}
