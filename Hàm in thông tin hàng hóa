@@ -1,0 +1,14 @@
+void in(const struct Product *p) { // ham in thong tin hang hoa
+    printf("-----------------------------------------------\n");
+    printf("Ma so hang hoa la: %s\n", p->mshh);
+    printf("Ten san pham la: %s\n", p->name);
+    printf("Phan loai san pham: %s\n", p->material);
+    printf("Nguon goc san pham: %s\n", p->origin);
+    printf("Gia thanh: %.2f\n", p->cost);
+    printf("Ngay san xuat va han su dung: %s - %s\n", p->nsx, p->hsd);
+    printf("So luong san pham trong kho: %d\n", p->quantity);
+    printf("Thoi gian nhap (xuat): %s\n", p->time);
+    printf("Dia diem nhap (xuat): %s\n", p->place);
+    printf("Trang thai hang hoa: %s\n", p->nx); // nhap hoac xuat
+    printf("------------------------------------------------\n");
+}

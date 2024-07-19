@@ -1,0 +1,5 @@
+int sosanhGia(const void *a, const void *b) {
+    double costA = ((Product *)a)->cost;
+    double costB = ((Product *)b)->cost;
+    return (costA < costB) - (costA > costB);
+}

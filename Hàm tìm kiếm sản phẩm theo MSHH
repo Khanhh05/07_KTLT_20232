@@ -1,0 +1,15 @@
+void tkms(const Product p[], int N) {
+    char mshh[50];
+    printf("Nhap ma so hang hoa can tim: ");
+    scanf("%s", mshh);
+    int found = 0;
+    for (int i = 0; i < N; i++) {
+        if (strcmp(p[i].mshh, mshh) == 0) {
+            in(&p[i]);
+            found = 1;
+            break;
+        }
+    }
+    if (!found)
+        printf("Khong tim thay hang hoa can tim!\n");
+}

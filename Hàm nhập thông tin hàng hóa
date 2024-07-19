@@ -1,0 +1,20 @@
+void nhap(struct Product *p) { // ham nhap thong tin hang hoa
+    printf("Nhap trang thai hang hoa(nhap/xuat): "); scanf("%s", p->nx);
+    printf("Nhap ma so hang hoa: "); scanf("%s", p->mshh);
+    printf("Nhap ten san pham: "); getchar(); fgets(p->name, sizeof(p->name), stdin);
+    p->name[strcspn(p->name, "\n")] = 0; 
+    printf("Phan loai san pham(huu co/vo co): "); fgets(p->material, sizeof(p->material), stdin);
+    p->material[strcspn(p->material, "\n")] = 0; 
+    printf("Nguon goc san pham: "); fgets(p->origin, sizeof(p->origin), stdin);
+    p->origin[strcspn(p->origin, "\n")] = 0; 
+    printf("Gia thanh: "); scanf("%lf", &p->cost);
+    printf("NSX: "); getchar(); fgets(p->nsx, sizeof(p->nsx), stdin);
+    p->nsx[strcspn(p->nsx, "\n")] = 0; 
+    printf("HSD: "); fgets(p->hsd, sizeof(p->hsd), stdin);
+    p->hsd[strcspn(p->hsd, "\n")] = 0; 
+    printf("Nhap so luong san pham trong kho: "); scanf("%d", &p->quantity);
+    printf("Nhap thoi gian: "); getchar(); fgets(p->time, sizeof(p->time), stdin);
+    p->time[strcspn(p->time, "\n")] = 0; 
+    printf("Nhap dia diem: "); fgets(p->place, sizeof(p->place), stdin);
+    p->place[strcspn(p->place, "\n")] = 0; 
+}

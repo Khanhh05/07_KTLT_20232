@@ -1,0 +1,3 @@
+void sapXepGiaGiamDan(Product p[], int N) {
+    qsort(p, N, sizeof(Product), sosanhGia);
+}
