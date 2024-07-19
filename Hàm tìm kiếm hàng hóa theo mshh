@@ -5,7 +5,7 @@ void tkms(Product p[], int N) {
     for (int i = 0; i < N; i++) {
         if (p[i].getMshh() == mshh) {
             p[i].in();
-            found = true; // da tim thay
+            found = true;
             break;
         }
     }
