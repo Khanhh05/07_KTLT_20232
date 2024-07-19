@@ -1,1 +1,55 @@
+int main() {
+    cout << "gioi han kho: "<<N<<endl;
+	Product* p = new Product[N];
+    int count = 0; // so luong san pham hien tai
+    int choice;
 
+    while (true) {
+        cout << "             -----------------------MENU-----------------------\n";
+        cout << "                   1. Nhap thong tin hang hoa\n";
+        cout << "                   2. Hien thi thong tin hang hoa\n";
+        cout << "                   3. Tim kiem hang hoa theo ma so\n";
+        cout << "                   4. Sap xep hang hoa theo gia giam dan\n";
+        cout << "                   5. Thong ke va sap xep san pham co gia lon hon mot so\n";
+       	cout << "                   6. Tim hiem hang hoa theo trang thai(nhap/xuat)\n";
+		cout << "                   7. Thoat\n";
+        cout << "                   Lua chon cua ban: ";
+        cin >> choice;
+
+        switch (choice) {
+        case 1:
+             if (count >= N) {
+                cout << "Bo nho day, khong the them san pham moi!\n";
+            } else {
+                p[count].nhap();
+                count++;
+            }
+            break;
+        case 2:
+            Product::inds(p, count);
+            break;
+        case 3:
+            tkms(p, count);
+            break;
+        case 4:
+            sapXepGiaGiamDan(p, count);
+            cout << "Danh sach hang hoa sau khi sap xep theo gia giam dan:\n";
+            Product::inds(p, count);
+            break;
+        case 5:
+            thongKeVaSapXep(p, count);
+            break;
+        case 6:
+		    tknx(p,count);  
+			break;  
+        case 7:
+            delete[] p;
+            return 0;
+        default:
+            cout << "Lua chon khong hop le! Vui long chon lai.\n";
+            break;
+        }
+    }
+
+    return 0;
+}
