@@ -1,0 +1,6 @@
+void inds(const struct Product *p, int count) { // in danh sach hang hoa
+    printf("Thong tin hang hoa: \n");
+    for (int i = 0; i < count; i++) {
+        in(&p[i]);
+    }
+}
