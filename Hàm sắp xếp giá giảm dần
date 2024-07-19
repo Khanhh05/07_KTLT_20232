@@ -1,0 +1,3 @@
+void sapXepGiaGiamDan(Product p[], int N) {
+    sort(p, p + N, sosanhGia);
+}
