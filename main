@@ -1,19 +1,21 @@
 int main() {
     printf("gioi han kho: %d\n", N);
-    struct Product *p = (struct Product *)malloc(N * sizeof(struct Product));
+    Product *p = (Product *)malloc(N * sizeof(Product));
     int count = 0; // so luong san pham hien tai
     int choice;
 
     while (1) {
-        printf("             -----------------------MENU-----------------------\n");
-        printf("                   1. Nhap thong tin hang hoa\n");
-        printf("                   2. Hien thi thong tin hang hoa\n");
-        printf("                   3. Tim kiem hang hoa theo ma so\n");
-        printf("                   4. Sap xep hang hoa theo gia giam dan\n");
-        printf("                   5. Thong ke va sap xep san pham co gia lon hon mot so\n");
-        printf("                   6. Tim hiem hang hoa theo trang thai(nhap/xuat)\n");
-        printf("                   7. Thoat\n");
-        printf("                   Lua chon cua ban: ");
+        printf("             -----------------------MENU---------------------------------------\n");
+        printf("             |      1. Nhap thong tin hang hoa                                |\n");
+        printf("             |      2. Hien thi thong tin hang hoa                            |\n");
+        printf("             |      3. Tim kiem hang hoa theo ma so                           |\n");
+        printf("             |      4. Sap xep hang hoa theo gia giam dan                     |\n");
+        printf("             |      5. Thong ke va sap xep san pham co gia lon hon mot so     |\n");
+        printf("             |      6. Tim hiem hang hoa theo trang thai (nhap/xuat)          |\n");
+        printf("             |      7. Xoa thong tin hang hoa                                 |\n");
+        printf("             |      8. Thoat                                                  |\n");
+        printf("             |      Lua chon cua ban:                                         |\n");
+        printf("             ------------------------------------------------------------------\n");
         scanf("%d", &choice);
 
         switch (choice) {
@@ -43,10 +45,17 @@ int main() {
             tknx(p, count);
             break;
         case 7:
+            xoaSanPham(p, &count);
+            break;
+        case 8:
             free(p);
             return 0;
-         
+        default:
+            printf("Lua chon khong hop le! Vui long chon lai.\n");
+            break;
         }
-}; 
+    }
+
+    return 0;
 }
 
