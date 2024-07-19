@@ -15,6 +15,5 @@ static void inds(Product p[], int N) { // in danh sach hang hoa
     string getNx() const{
 	    return nx;
 	}
-    // Friend function to access private members
     friend void tkms(Product p[], int N);
 };
