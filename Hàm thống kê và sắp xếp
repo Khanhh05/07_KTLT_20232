@@ -1,4 +1,3 @@
-// ham thong ke va sap xep san pham co gia lon hon mot so nhap tu ban phim
 void thongKeVaSapXep(Product p[], int N) {
     double giaCanTim;
     cout << "Nhap gia can tim: "; cin >> giaCanTim;
@@ -14,3 +13,7 @@ void thongKeVaSapXep(Product p[], int N) {
             p[i].in();
         }
     }
+    sapXepGiaGiamDan(p, N);
+    cout << "Danh sach hang hoa sau khi sap xep theo gia giam dan:\n";
+    Product::inds(p, N);
+}
