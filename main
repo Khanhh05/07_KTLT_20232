@@ -5,16 +5,18 @@ int main() {
     int choice;
 
     while (true) {
-        cout << "             -----------------------MENU-----------------------\n";
-        cout << "                   1. Nhap thong tin hang hoa\n";
-        cout << "                   2. Hien thi thong tin hang hoa\n";
-        cout << "                   3. Tim kiem hang hoa theo ma so\n";
-        cout << "                   4. Sap xep hang hoa theo gia giam dan\n";
-        cout << "                   5. Thong ke va sap xep san pham co gia lon hon mot so\n";
-       	cout << "                   6. Tim hiem hang hoa theo trang thai(nhap/xuat)\n";
-		cout << "                   7. Thoat\n";
-        cout << "                   Lua chon cua ban: ";
-        cin >> choice;
+        cout << "             -----------------------MENU---------------------------------------\n";
+        cout << "             |      1. Nhap thong tin hang hoa                                |\n";
+        cout << "             |      2. Hien thi thong tin hang hoa                            |\n";
+        cout << "             |      3. Tim kiem hang hoa theo ma so                           |\n";
+        cout << "             |      4. Sap xep hang hoa theo gia giam dan                     |\n";
+        cout << "             |      5. Thong ke va sap xep san pham co gia lon hon mot so     |\n";
+       	cout << "             |      6. Tim hiem hang hoa theo trang thai(nhap/xuat)           |\n";
+		cout << "             |      7. Xoa thong tin hang hoa                                 |\n";
+		cout << "             |      8. Thoat                                                  |\n";
+        cout << "             |      Lua chon cua ban:                                         |\n";
+        cout << "             ------------------------------------------------------------------\n";
+		cin >> choice;
 
         switch (choice) {
         case 1:
@@ -41,8 +43,11 @@ int main() {
             break;
         case 6:
 		    tknx(p,count);  
+			break;
+	    case 7:
+		    xoaSanPham(p, count);
 			break;  
-        case 7:
+        case 8:
             delete[] p;
             return 0;
         default:
