@@ -1,0 +1,16 @@
+// ham thong ke va sap xep san pham co gia lon hon mot so nhap tu ban phim
+void thongKeVaSapXep(Product p[], int N) {
+    double giaCanTim;
+    cout << "Nhap gia can tim: "; cin >> giaCanTim;
+
+    // Danh sach cac san pham co gia lon hon giaCanTim
+    int count = 0;
+    for (int i = 0; i < N; ++i) {
+        if (p[i].getCost() > giaCanTim) {
+            ++count;
+            if (count == 1) {
+                cout << "Danh sach cac san pham co gia lon hon " << giaCanTim << ":\n";
+            }
+            p[i].in();
+        }
+    }
