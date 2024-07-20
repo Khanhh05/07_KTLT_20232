@@ -85,7 +85,7 @@ public:
     string getNx() const{
 	    return nx;
 	}
-    // Friend function to access private members
+    // Hàm friend de truy cap vao cac bien private
     friend void tkms(Product p[], int N);
 };
 //HAM XOA SAN PHAM THEO MSHH
@@ -172,6 +172,23 @@ void thongKeVaSapXep(Product p[], int N) {
     if (!found)
         cout << "Khong tim thay hang hoa theo trang thai nhap/xuat!\n";
 }
+void suaSanPham(Product p[], int N) {
+    string mshh;
+    cout << "Nhap ma so hang hoa can sua: "; cin >> mshh;
+    bool found = false;
+    for (int i = 0; i < N; ++i) {
+        if (p[i].getMshh() == mshh) {
+            found = true;
+            cout << "Nhap thong tin moi cho san pham:\n";
+            p[i].nhap();
+            cout << "San pham da duoc sua thanh cong!\n";
+            break;
+        }
+    }
+    if (!found) {
+        cout << "Khong tim thay san pham co ma so " << mshh << "!\n";
+    }
+}
 int main() {
     cout << "gioi han kho: "<<N<<endl;
 	Product* p = new Product[N];
@@ -186,11 +203,12 @@ int main() {
         cout << "             |      4. Sap xep hang hoa theo gia giam dan                     |\n";
         cout << "             |      5. Thong ke va sap xep san pham co gia lon hon mot so     |\n";
        	cout << "             |      6. Tim hiem hang hoa theo trang thai(nhap/xuat)           |\n";
-	  	  cout << "             |      7. Xoa thong tin hang hoa                                 |\n";
-	    	cout << "             |      8. Thoat                                                  |\n";
+		cout << "             |      7. Xoa thong tin hang hoa                                 |\n";
+		cout << "             |      8. Sua thong tin hang hoa                                 |\n";
+		cout << "             |      9. Thoat                                                  |\n";
         cout << "             |      Lua chon cua ban:                                         |\n";
         cout << "             ------------------------------------------------------------------\n";
-	  	cin >> choice;
+		cin >> choice;
 
         switch (choice) {
         case 1:
@@ -218,10 +236,13 @@ int main() {
         case 6:
 		    tknx(p,count);  
 			break;
-	      case 7:
+	    case 7:
 		    xoaSanPham(p, count);
-			break;  
-        case 8:
+			break;
+		case 8:
+			suaSanPham(p,count);
+			break;
+        case 9:
             delete[] p;
             return 0;
         default:
