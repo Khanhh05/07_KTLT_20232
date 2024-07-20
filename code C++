@@ -1,0 +1,234 @@
+#include <iostream>
+#include <string>
+#include <algorithm>
+const int N = 1024;
+using namespace std;
+
+class Product {
+    string mshh; // ma so hang hoa
+    string name; // ten san pham
+    string material; // phan loai huu co hay vo co
+    string origin; // xuat xu
+    double cost; // gia thanh
+    string nsx, hsd; // ngay san xuat va han su dung
+    int quantity; // so luong hang nhap, xuat
+    string time; // thoi gian
+    string place; // dia diem giao hang den
+    string nx; // nhap hoac xuat
+
+public:
+    // Ham tao co tham so
+    Product(string _mshh, string _name, string _material, string _origin, double _cost, string _nsx, string _hsd, int _quantity, string _time, string _place, string _nx) {
+        mshh = _mshh;
+        name = _name;
+        material = _material;
+        origin = _origin;
+        cost = _cost;
+        nsx = _nsx;
+        hsd = _hsd;
+        quantity = _quantity;
+        time = _time;
+        place = _place;
+        nx = _nx;
+    }
+
+    // Ham tao khong tham so
+    Product() {
+        mshh = "";
+        cost = 0.0;
+        quantity = 0;
+    }
+
+    void in() const { // ham in thong tin hang hoa
+        cout << "-----------------------------------------------\n";
+        cout << "Ma so hang hoa la: " << mshh << endl;
+        cout << "Ten san pham la: " << name << endl;
+        cout << "Phan loai san pham: " << material << endl;
+        cout << "Nguon goc san pham: " << origin << endl;
+        cout << "Gia thanh: " << cost << endl;
+        cout << "Ngay san xuat va han su dung: " << nsx << " - " << hsd << endl;
+        cout << "So luong san pham trong kho: " << quantity << endl;
+        cout << "Thoi gian nhap (xuat): " << time << endl;
+        cout << "Dia diem nhap (xuat): " << place << endl;
+        cout << "Trang thai hang hoa: " << nx << endl; // nhap hoac xuat
+        cout << "------------------------------------------------\n";
+    }
+
+    void nhap() { // ham nhap thong tin hang hoa
+        cout << "Nhap trang thai hang hoa(nhap/xuat): "; cin >> nx;
+        cout << "Nhap ma so hang hoa: "; cin >> mshh;
+        cout << "Nhap ten san pham: "; cin.ignore(); getline(cin, name);
+        cout << "Phan loai san pham(huu co/vo co): "; getline(cin, material);
+        cout << "Nguon goc san pham: "; getline(cin, origin);
+        cout << "Gia thanh: "; cin >> cost;
+        cout << "NSX: "; cin.ignore(); getline(cin, nsx);
+        cout << "HSD: "; getline(cin, hsd);
+        cout << "Nhap so luong san pham trong kho: "; cin >> quantity;
+        cout << "Nhap thoi gian: "; cin.ignore(); getline(cin, time);
+        cout << "Nhap dia diem: "; getline(cin, place);
+    }
+
+    static void inds(Product p[], int N) { // in danh sach hang hoa
+        cout << "Thong tin hang hoa: \n";
+        for (int i = 0; i < N; i++) {
+            p[i].in();
+        }
+    }
+
+    double getCost() const {
+        return cost;
+    }
+
+    string getMshh() const {
+        return mshh;
+    }
+    string getNx() const{
+	    return nx;
+	}
+    // Friend function to access private members
+    friend void tkms(Product p[], int N);
+};
+//HAM XOA SAN PHAM THEO MSHH
+void xoaSanPham(Product p[], int &count) {
+    string mshh;
+    cout << "Nhap ma so hang hoa can xoa: "; cin >> mshh;
+    int index = -1;
+    for (int i = 0; i < count; i++) {
+        if (p[i].getMshh() == mshh) {
+            index = i;
+            break;
+        }
+    }
+    if (index == -1) {
+        cout << "Khong tim thay hang hoa can xoa!\n";
+        return;
+    }
+
+    for (int i = index; i < count - 1; i++) {
+        p[i] = p[i + 1];
+    }
+    count--;
+    cout << "Da xoa hang hoa co ma so " << mshh << "!\n";
+}
+// ham tim kiem hang hoa theo mshh
+void tkms(Product p[], int N) {
+    string mshh;
+    cout << "Nhap ma so hang hoa can tim: "; cin >> mshh;
+    bool found = false;
+    for (int i = 0; i < N; i++) {
+        if (p[i].getMshh() == mshh) {
+            p[i].in();
+            found = true; // da tim thay
+            break;
+        }
+    }
+    if (!found)
+        cout << "Khong tim thay hang hoa can tim!\n";
+}
+
+// ham so sanh de sap xep theo gia giam dan
+bool sosanhGia(const Product& a, const Product& b) {
+    return a.getCost() > b.getCost();
+}
+
+// ham sap xep hang hoa theo gia giam dan
+void sapXepGiaGiamDan(Product p[], int N) {
+    sort(p, p + N, sosanhGia);
+}
+
+// ham thong ke va sap xep san pham co gia lon hon mot so nhap tu ban phim
+void thongKeVaSapXep(Product p[], int N) {
+    double giaCanTim;
+    cout << "Nhap gia can tim: "; cin >> giaCanTim;
+
+    // Danh sach cac san pham co gia lon hon giaCanTim
+    int count = 0;
+    for (int i = 0; i < N; ++i) {
+        if (p[i].getCost() > giaCanTim) {
+            ++count;
+            if (count == 1) {
+                cout << "Danh sach cac san pham co gia lon hon " << giaCanTim << ":\n";
+            }
+            p[i].in();
+        }
+    }
+
+    // Sap xep cac san pham theo thu tu gia giam dan
+    sapXepGiaGiamDan(p, N);
+    cout << "Danh sach hang hoa sau khi sap xep theo gia giam dan:\n";
+    Product::inds(p, N);
+}
+// ham tim kiem hang hoa theo trang thai nhap hoac xuat
+    void tknx(Product p[], int N) {
+    string trangThai;
+    cout << "Nhap trang thai hang hoa can tim (nhap/xuat): "; cin >> trangThai;
+    bool found = false;
+    for (int i = 0; i < N; i++) {
+        if (p[i].getNx() == trangThai) {
+            p[i].in();
+            found = true;
+        }
+    }
+    if (!found)
+        cout << "Khong tim thay hang hoa theo trang thai nhap/xuat!\n";
+}
+int main() {
+    cout << "gioi han kho: "<<N<<endl;
+	Product* p = new Product[N];
+    int count = 0; // so luong san pham hien tai
+    int choice;
+
+    while (true) {
+        cout << "             -----------------------MENU---------------------------------------\n";
+        cout << "             |      1. Nhap thong tin hang hoa                                |\n";
+        cout << "             |      2. Hien thi thong tin hang hoa                            |\n";
+        cout << "             |      3. Tim kiem hang hoa theo ma so                           |\n";
+        cout << "             |      4. Sap xep hang hoa theo gia giam dan                     |\n";
+        cout << "             |      5. Thong ke va sap xep san pham co gia lon hon mot so     |\n";
+       	cout << "             |      6. Tim hiem hang hoa theo trang thai(nhap/xuat)           |\n";
+	  	  cout << "             |      7. Xoa thong tin hang hoa                                 |\n";
+	    	cout << "             |      8. Thoat                                                  |\n";
+        cout << "             |      Lua chon cua ban:                                         |\n";
+        cout << "             ------------------------------------------------------------------\n";
+	  	cin >> choice;
+
+        switch (choice) {
+        case 1:
+             if (count >= N) {
+                cout << "Bo nho day, khong the them san pham moi!\n";
+            } else {
+                p[count].nhap();
+                count++;
+            }
+            break;
+        case 2:
+            Product::inds(p, count);
+            break;
+        case 3:
+            tkms(p, count);
+            break;
+        case 4:
+            sapXepGiaGiamDan(p, count);
+            cout << "Danh sach hang hoa sau khi sap xep theo gia giam dan:\n";
+            Product::inds(p, count);
+            break;
+        case 5:
+            thongKeVaSapXep(p, count);
+            break;
+        case 6:
+		    tknx(p,count);  
+			break;
+	      case 7:
+		    xoaSanPham(p, count);
+			break;  
+        case 8:
+            delete[] p;
+            return 0;
+        default:
+            cout << "Lua chon khong hop le! Vui long chon lai.\n";
+            break;
+        }
+    }
+
+    return 0;
+}
