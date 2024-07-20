@@ -1,0 +1,222 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+const int N = 1024;
+
+typedef struct {
+    char mshh[50];     // ma so hang hoa
+    char name[100];    // ten san pham
+    char material[50]; // phan loai huu co hay vo co
+    char origin[50];   // xuat xu
+    double cost;       // gia thanh
+    char nsx[50];    // ngay san xuat
+    char hsd[50];   // han su dung
+    int quantity;      // so luong hang nhap, xuat
+    char time[50];     // thoi gian
+    char place[100];   // dia diem giao hang den
+    char nx[50];    // nhap hoac xuat
+} Product;
+
+void nhap(Product *p) {
+    printf("Nhap trang thai hang hoa (nhap/xuat): ");
+    scanf("%s", p->nx);
+    printf("Nhap ma so hang hoa: ");
+    scanf("%s", p->mshh);
+    printf("Nhap ten san pham: ");
+    getchar();
+    fgets(p->name, sizeof(p->name), stdin);
+    p->name[strcspn(p->name, "\n")] = '\0';
+    printf("Phan loai san pham (huu co/vo co): ");
+    fgets(p->material, sizeof(p->material), stdin);
+    p->material[strcspn(p->material, "\n")] = '\0';
+    printf("Nguon goc san pham: ");
+    fgets(p->origin, sizeof(p->origin), stdin);
+    p->origin[strcspn(p->origin, "\n")] = '\0';
+    printf("Gia thanh: ");
+    scanf("%lf", &p->cost);
+    printf("NSX: ");
+    getchar();
+    fgets(p->nsx, sizeof(p->nsx), stdin);
+    p->nsx[strcspn(p->nsx, "\n")] = '\0';
+    printf("HSD: ");
+    fgets(p->hsd, sizeof(p->hsd), stdin);
+    p->hsd[strcspn(p->hsd, "\n")] = '\0';
+    printf("Nhap so luong san pham trong kho: ");
+    scanf("%d", &p->quantity);
+    printf("Nhap thoi gian: ");
+    getchar();
+    fgets(p->time, sizeof(p->time), stdin);
+    p->time[strcspn(p->time, "\n")] = '\0';
+    printf("Nhap dia diem: ");
+    fgets(p->place, sizeof(p->place), stdin);
+    p->place[strcspn(p->place, "\n")] = '\0';
+}
+
+void in(const Product *p) {
+    printf("-----------------------------------------------\n");
+    printf("Ma so hang hoa la: %s\n", p->mshh);
+    printf("Ten san pham la: %s\n", p->name);
+    printf("Phan loai san pham: %s\n", p->material);
+    printf("Nguon goc san pham: %s\n", p->origin);
+    printf("Gia thanh: %.2f\n", p->cost);
+    printf("Ngay san xuat va han su dung: %s - %s\n", p->nsx, p->hsd);
+    printf("So luong san pham trong kho: %d\n", p->quantity);
+    printf("Thoi gian nhap (xuat): %s\n", p->time);
+    printf("Dia diem nhap (xuat): %s\n", p->place);
+    printf("Trang thai hang hoa: %s\n", p->nx);
+    printf("------------------------------------------------\n");
+}
+
+void inds(const Product p[], int N) {
+    printf("Thong tin hang hoa: \n");
+    for (int i = 0; i < N; i++) {
+        in(&p[i]);
+    }
+}
+
+void tkms(const Product p[], int N) {
+    char mshh[50];
+    printf("Nhap ma so hang hoa can tim: ");
+    scanf("%s", mshh);
+    int found = 0;
+    for (int i = 0; i < N; i++) {
+        if (strcmp(p[i].mshh, mshh) == 0) {
+            in(&p[i]);
+            found = 1;
+            break;
+        }
+    }
+    if (!found)
+        printf("Khong tim thay hang hoa can tim!\n");
+}
+
+int sosanhGia(const void *a, const void *b) {
+    double costA = ((Product *)a)->cost;
+    double costB = ((Product *)b)->cost;
+    return (costA < costB) - (costA > costB);
+}
+
+void sapXepGiaGiamDan(Product p[], int N) {
+    qsort(p, N, sizeof(Product), sosanhGia);
+}
+
+void thongKeVaSapXep(Product p[], int N) {
+    double giaCanTim;
+    printf("Nhap gia can tim: ");
+    scanf("%lf", &giaCanTim);
+
+    int count = 0;
+    for (int i = 0; i < N; ++i) {
+        if (p[i].cost > giaCanTim) {
+            if (count == 0) {
+                printf("Danh sach cac san pham co gia lon hon %.2f:\n", giaCanTim);
+            }
+            in(&p[i]);
+            count++;
+        }
+    }
+
+    sapXepGiaGiamDan(p, N);
+    printf("Danh sach hang hoa sau khi sap xep theo gia giam dan:\n");
+    inds(p, N);
+}
+
+void tknx(const Product p[], int N) {
+    char trangThai[10];
+    printf("Nhap trang thai hang hoa can tim (nhap/xuat): ");
+    scanf("%s", trangThai);
+    int found = 0;
+    for (int i = 0; i < N; i++) {
+        if (strcmp(p[i].nx, trangThai) == 0) {
+            in(&p[i]);
+            found = 1;
+        }
+    }
+    if (!found)
+        printf("Khong tim thay hang hoa theo trang thai nhap/xuat!\n");
+}
+
+void xoaSanPham(Product p[], int *count) {
+    char mshh[50];
+    printf("Nhap ma so hang hoa can xoa: ");
+    scanf("%s", mshh);
+    int index = -1;
+    for (int i = 0; i < *count; i++) {
+        if (strcmp(p[i].mshh, mshh) == 0) {
+            index = i;
+            break;
+        }
+    }
+    if (index == -1) {
+        printf("Khong tim thay hang hoa can xoa!\n");
+        return;
+    }
+
+    for (int i = index; i < *count - 1; i++) {
+        p[i] = p[i + 1];
+    }
+    (*count)--;
+    printf("Da xoa hang hoa co ma so %s!\n", mshh);
+}
+
+int main() {
+    printf("gioi han kho: %d\n", N);
+    Product *p = (Product *)malloc(N * sizeof(Product));
+    int count = 0; // so luong san pham hien tai
+    int choice;
+
+    while (1) {
+        printf("             -----------------------MENU---------------------------------------\n");
+        printf("             |      1. Nhap thong tin hang hoa                                |\n");
+        printf("             |      2. Hien thi thong tin hang hoa                            |\n");
+        printf("             |      3. Tim kiem hang hoa theo ma so                           |\n");
+        printf("             |      4. Sap xep hang hoa theo gia giam dan                     |\n");
+        printf("             |      5. Thong ke va sap xep san pham co gia lon hon mot so     |\n");
+        printf("             |      6. Tim hiem hang hoa theo trang thai (nhap/xuat)          |\n");
+        printf("             |      7. Xoa thong tin hang hoa                                 |\n");
+        printf("             |      8. Thoat                                                  |\n");
+        printf("             |      Lua chon cua ban:                                         |\n");
+        printf("             ------------------------------------------------------------------\n");
+        scanf("%d", &choice);
+
+        switch (choice) {
+        case 1:
+            if (count >= N) {
+                printf("Bo nho day, khong the them san pham moi!\n");
+            } else {
+                nhap(&p[count]);
+                count++;
+            }
+            break;
+        case 2:
+            inds(p, count);
+            break;
+        case 3:
+            tkms(p, count);
+            break;
+        case 4:
+            sapXepGiaGiamDan(p, count);
+            printf("Danh sach hang hoa sau khi sap xep theo gia giam dan:\n");
+            inds(p, count);
+            break;
+        case 5:
+            thongKeVaSapXep(p, count);
+            break;
+        case 6:
+            tknx(p, count);
+            break;
+        case 7:
+            xoaSanPham(p, &count);
+            break;
+        case 8:
+            free(p);
+            return 0;
+        default:
+            printf("Lua chon khong hop le! Vui long chon lai.\n");
+            break;
+        }
+    }
+
+    return 0;
+}
