@@ -1,0 +1,21 @@
+void suaSanPham(Product p[], int N) {
+    char mshh[50];
+    bool found = false;
+
+    printf("Nhap ma so hang hoa can sua: ");
+    scanf("%s", mshh);
+
+    for (int i = 0; i < N; ++i) {
+        if (strcmp(p[i].mshh, mshh) == 0) {
+            found = true;
+            printf("Nhap thong tin moi cho san pham:\n");
+            nhap(&p[i]);
+            printf("San pham da duoc sua thanh cong!\n");
+            break;
+        }
+    }
+
+    if (!found) {
+        printf("Khong tim thay san pham co ma so %s!\n", mshh);
+    }
+}
