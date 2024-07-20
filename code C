@@ -42,7 +42,7 @@ void nhap(Product *p) {
     printf("HSD: ");
     fgets(p->hsd, sizeof(p->hsd), stdin);
     p->hsd[strcspn(p->hsd, "\n")] = '\0';
-    printf("Nhap so luong san pham trong kho: ");
+    printf("Nhap so luong san pham : ");
     scanf("%d", &p->quantity);
     printf("Nhap thoi gian: ");
     getchar();
@@ -61,7 +61,7 @@ void in(const Product *p) {
     printf("Nguon goc san pham: %s\n", p->origin);
     printf("Gia thanh: %.2f\n", p->cost);
     printf("Ngay san xuat va han su dung: %s - %s\n", p->nsx, p->hsd);
-    printf("So luong san pham trong kho: %d\n", p->quantity);
+    printf("So luong san pham : %d\n", p->quantity);
     printf("Thoi gian nhap (xuat): %s\n", p->time);
     printf("Dia diem nhap (xuat): %s\n", p->place);
     printf("Trang thai hang hoa: %s\n", p->nx);
@@ -159,6 +159,27 @@ void xoaSanPham(Product p[], int *count) {
     (*count)--;
     printf("Da xoa hang hoa co ma so %s!\n", mshh);
 }
+void suaSanPham(Product p[], int N) {
+    char mshh[50];
+    bool found = false;
+
+    printf("Nhap ma so hang hoa can sua: ");
+    scanf("%s", mshh);
+
+    for (int i = 0; i < N; ++i) {
+        if (strcmp(p[i].mshh, mshh) == 0) {
+            found = true;
+            printf("Nhap thong tin moi cho san pham:\n");
+            nhap(&p[i]);
+            printf("San pham da duoc sua thanh cong!\n");
+            break;
+        }
+    }
+
+    if (!found) {
+        printf("Khong tim thay san pham co ma so %s!\n", mshh);
+    }
+}
 
 int main() {
     printf("gioi han kho: %d\n", N);
@@ -175,7 +196,8 @@ int main() {
         printf("             |      5. Thong ke va sap xep san pham co gia lon hon mot so     |\n");
         printf("             |      6. Tim hiem hang hoa theo trang thai (nhap/xuat)          |\n");
         printf("             |      7. Xoa thong tin hang hoa                                 |\n");
-        printf("             |      8. Thoat                                                  |\n");
+        printf("             |      8. Sua thong tin hang hoa                                 |\n");
+		printf("             |      9. Thoat                                                  |\n");
         printf("             |      Lua chon cua ban:                                         |\n");
         printf("             ------------------------------------------------------------------\n");
         scanf("%d", &choice);
@@ -210,6 +232,9 @@ int main() {
             xoaSanPham(p, &count);
             break;
         case 8:
+		    suaSanPham(p,count);
+			break;    
+        case 9:
             free(p);
             return 0;
         default:
@@ -220,3 +245,4 @@ int main() {
 
     return 0;
 }
+
